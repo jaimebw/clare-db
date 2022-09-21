@@ -22,6 +22,7 @@ You can see an example of a 4 digit naca simulation in a [transonic](https://en.
 
 ![image info](/assets/imgs/example_naca.png)
 
+You can acces more information at the wiki of the repo.
 
 
 ## Authors
