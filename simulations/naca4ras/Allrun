@@ -1,0 +1,28 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+# Run Python scripts
+NACA=4412
+AOA=0
+NPOINTS=100
+LENGTH=1
+CHORD=1
+STL_NAME="naca${NACA}.stl"
+comilla='"'
+python3 scripts/naca_gen.py $NACA -n $NPOINTS -l $LENGTH -cl $CHORD -aoa $AOA
+mv ${STL_NAME}  constant/geometry/
+# Change blockMeshdict
+sed -i "s/.*file.*/\t\t\t\tfile \t ${comilla}${STL_NAME}${comilla}; /" system/blockMeshDict
+
+application="$(getApplication)"
+
+runApplication blockMesh
+#runApplication transformPoints "scale=(1 0 1)"
+runApplication extrudeMesh
+runApplication decomposePar
+runApplication renumberMesh
+runApplication $application
+#runApplication reconstructPar
+#------------------------------------------------------------------------------
