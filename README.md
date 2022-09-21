@@ -27,7 +27,7 @@ You can acces more information at the wiki of the repo.
 
 ## Authors
 * Rodrigo Castellanos Garcia de Blas
-* Juan Manuel Catalán 
+* Juan Manuel Catalán Gómez
 * Jaime Bowen Varela
 
 ## Want to collaborate?
