@@ -1,2 +1,7 @@
 .DS_Store
-
+.ipynb_checkpoints
+example_sim
+open_foam_examples
+venv
+otros
+*.stl
