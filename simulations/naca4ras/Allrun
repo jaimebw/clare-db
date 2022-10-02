@@ -12,9 +12,11 @@ CHORD=1
 STL_NAME="naca${NACA}.stl"
 comilla='"'
 python3 scripts/naca_gen.py $NACA -n $NPOINTS -l $LENGTH -cl $CHORD -aoa $AOA
+mkdir constant/geometry/
 mv ${STL_NAME}  constant/geometry/
 # Change blockMeshdict
 sed -i "s/.*file.*/\t\t\t\tfile \t ${comilla}${STL_NAME}${comilla}; /" system/blockMeshDict
+touch sim.foam
 
 application="$(getApplication)"
 
