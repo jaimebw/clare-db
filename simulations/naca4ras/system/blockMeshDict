@@ -19,18 +19,19 @@ domain
     xMax  16;
     zMin -8;
     zMax  8;
-
+    
     // Number of cells
-    zCells  100; // aerofoil to far field
-    xUCells 50; // upstream
-    xMCells 50; // middle
-    xDCells 60; // downstream
+    zCells  450; // aerofoil to far field: normal direction cells     (original value: 100)
+    xUCells 120; // upstream: from inlet (xmin) to x=0.3chord (aprox) (original value: 50)
+    xMCells 150; // middle: from x=0.3chord (aprox) to x=chord (TE)   (original value: 50)
+    xDCells 200; // downstream: from x= chord (TE) to xMax            (original value 60)
 
     // Mesh grading
-    zGrading    40;  // aerofoil to far field
-    xUGrading   5;   // towards centre upstream
-    leadGrading 0.2; // towards leading edge
-    xDGrading   10;  // downstream
+    zGrading    300;  // aerofoil to far field (high values: more points on the airfoil)         (original value: 40)
+    xUGrading   60;   // towards centre upstream                                                 (original value: 5)
+    leadGrading 0.05; // towards leading edge (very low values: more points in the leading edge  (original value: 0.2)
+                      // in tangential direction, less points in x=0.3chord)
+    xDGrading   50;  // downstream                                                               (original value: 10)
 }
 
 aerofoil
