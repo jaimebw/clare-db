@@ -20,7 +20,7 @@ sed -i "s/.*file.*/\t\t\t\tfile \t ${comilla}${STL_NAME}${comilla}; /" system/bl
 ##Parallelization
 nxpar=4                  # number of procs in x dir
 nzpar=4                  # number of procs in z dir
-nproc=$(nxpar * nzpar) # total number of procs
+nproc=$((nxpar * nzpar)) # total number of procs
 # Change decomposeParDict
 sed -i "s/.*numberOfSubdomains.*/ numberOfSubdomains ${nproc}; /" system/decomposeParDict
 sed -i "s/.*(.*/n (${nxpar} 1 ${nzpar}); /" system/decomposeParDict
@@ -37,5 +37,3 @@ runApplication renumberMesh
 #runApplication $application
 mpiexec -np $nproc $application -parallel
 #runApplication reconstructPar
-#------------------------------------------------------------------------------
-~                                          
