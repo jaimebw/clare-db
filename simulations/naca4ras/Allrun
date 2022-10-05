@@ -6,7 +6,7 @@ cd ${0%/*} || exit 1    # Run from this directory
 # Run Python scripts
 NACA=4412
 AOA=0
-NPOINTS=100
+NPOINTS=200
 LENGTH=1
 CHORD=1
 STL_NAME="naca${NACA}.stl"
