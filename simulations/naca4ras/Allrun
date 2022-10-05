@@ -26,5 +26,5 @@ runApplication extrudeMesh
 runApplication decomposePar
 runApplication renumberMesh
 runApplication $application
-#runApplication reconstructPar
+runApplication reconstructPar
 #------------------------------------------------------------------------------
