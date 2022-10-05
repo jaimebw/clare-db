@@ -6,7 +6,7 @@ cd ${0%/*} || exit 1    # Run from this directory
 # Run Python scripts
 NACA=4412
 AOA=0
-NPOINTS=200
+NPOINTS=300
 LENGTH=1
 CHORD=1
 STL_NAME="naca${NACA}.stl"
@@ -16,6 +16,15 @@ mkdir constant/geometry/
 mv ${STL_NAME}  constant/geometry/
 # Change blockMeshdict
 sed -i "s/.*file.*/\t\t\t\tfile \t ${comilla}${STL_NAME}${comilla}; /" system/blockMeshDict
+
+##Parallelization
+nxpar=2                  # number of procs in x dir
+nzpar=2                  # number of procs in z dir
+nproc=$((nxpar * nzpar)) # total number of procs
+# Change decomposeParDict
+sed -i "s/.*(.*/n (${nxpar} 1 ${nzpar}); /" system/decomposeParDict
+sed -i "s/.*numberOfSubdomains.*/ numberOfSubdomains ${nproc}; /" system/decomposeParDict
+
 touch sim.foam
 
 application="$(getApplication)"
@@ -25,6 +34,6 @@ runApplication blockMesh
 runApplication extrudeMesh
 runApplication decomposePar
 runApplication renumberMesh
-runApplication $application
+#runApplication $application
+mpiexec -np $nproc $application -parallel
 #runApplication reconstructPar
-#------------------------------------------------------------------------------
